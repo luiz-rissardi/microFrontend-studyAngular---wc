@@ -50,9 +50,9 @@
                 }
               ],
               "outputHashing": "none",
-              "ssr":true,
-              "aot":true,
-              "optimization":true
+              "optimization":true,
+              "sourceMap":false,
+              "aot":true
             },
             "development": {
               "optimization": false,

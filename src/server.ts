@@ -5,7 +5,13 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
-import { join } from 'node:path';
+import cors from "cors"
+import path, { join } from 'node:path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -27,6 +33,11 @@ const angularApp = new AngularNodeAppEngine();
 /**
  * Serve static files from /browser
  */
+
+app.use(cors())
+app.use(express.static(path.join(__dirname)));
+console.log(path.join(__dirname));
+
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -52,7 +63,7 @@ app.use((req, res, next) => {
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url)) {
-  const port = process.env['PORT'] || 4000;
+  const port = process.env['PORT'] || 4100;
   app.listen(port, (error) => {
     if (error) {
       throw error;
