@@ -52,6 +52,7 @@
               "outputHashing": "none",
               "optimization":true,
               "sourceMap":false,
+              "prerender":true,
               "aot":true
             },
             "development": {
